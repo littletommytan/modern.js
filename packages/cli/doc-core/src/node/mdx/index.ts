@@ -8,11 +8,13 @@ import remarkPluginFrontMatter from 'remark-frontmatter';
 import remarkPluginMDXFrontMatter from 'remark-mdx-frontmatter';
 import { getHighlighter } from 'shiki';
 import remarkDirective from 'remark-directive';
+import rehypePluginExternalLinks from 'rehype-external-links';
 import { remarkPluginToc } from './remarkPlugins/toc';
 import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper';
 import { rehypePluginShiki } from './rehypePlugins/shiki';
 import { remarkPluginTip } from './remarkPlugins/tip';
-import { remarkPluginNormalizeLink } from './remarkPlugins/link';
+import { remarkPluginNormalizeLink } from './remarkPlugins/normalizeLink';
+import { remarkCheckDeadLinks } from './remarkPlugins/checkDeadLink';
 
 export async function createMDXOptions(
   userRoot: string,
@@ -29,6 +31,8 @@ export async function createMDXOptions(
   const rehypePluginsFromPlugins = docPlugins.flatMap(
     plugin => plugin.markdown?.rehypePlugins || [],
   ) as PluggableList;
+  const defaultLang = config.doc?.lang || 'zh';
+  const enableDeadLinksCheck = config.doc?.markdown?.checkDeadLinks ?? false;
   return {
     remarkPlugins: [
       remarkDirective,
@@ -41,13 +45,19 @@ export async function createMDXOptions(
         remarkPluginNormalizeLink,
         {
           base: config.doc?.base || '',
-          defaultLang: config.doc?.lang || 'zh',
+          defaultLang,
+          root: userRoot,
+        },
+      ],
+      enableDeadLinksCheck && [
+        remarkCheckDeadLinks,
+        {
           root: userRoot,
         },
       ],
       ...remarkPluginsFromConfig,
       ...remarkPluginsFromPlugins,
-    ],
+    ].filter(Boolean) as PluggableList,
     rehypePlugins: [
       rehypeSlug,
       [
@@ -67,6 +77,12 @@ export async function createMDXOptions(
       [
         rehypePluginShiki,
         { highlighter: await getHighlighter({ theme: 'nord' }) },
+      ],
+      [
+        rehypePluginExternalLinks,
+        {
+          target: '_blank',
+        },
       ],
       ...rehypePluginsFromConfig,
       ...rehypePluginsFromPlugins,

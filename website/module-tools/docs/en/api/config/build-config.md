@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # BuildConfig
 
-This section describes all the configuration of Module tools for building
+This section describes all the configuration of Module Tools for building
 
 ## alias
 
@@ -12,7 +12,7 @@ This section describes all the configuration of Module tools for building
 - default: `{'@': 'src',}`
 
 :::tip
-For TypeScript projects, you only need to configure [compilerOptions.paths](https://www.typescriptlang.org/tsconfig#paths) in `tsconfig.json`, Module tools will automatically recognize the alias in `tsconfig.json`, so there is no need to configure the `alias` field additionally.
+For TypeScript projects, you only need to configure [compilerOptions.paths](https://www.typescriptlang.org/tsconfig#paths) in `tsconfig.json`, Module Tools will automatically recognize the alias in `tsconfig.json`, so there is no need to configure the `alias` field additionally.
 :::
 
 ```js modern.config.ts
@@ -57,7 +57,7 @@ export default {
 
 ### path
 
-Static resource output path, will be based on [outDir](/zh/api/build-config/#outDir)
+Static resource output path, will be based on [outDir](/api/config/build-config#outDir)
 
 - type: `string`
 - default: `assets`
@@ -196,7 +196,7 @@ Path to the tsconfig file
 
 ### distPath
 
-The output path of the dts file, based on [outDir](/zh/api/build-config/#outDir)
+The output path of the dts file, based on [outDir](/api/config/build-config#outDir)
 
 - type: `string`
 - default: `. /types`
@@ -522,7 +522,7 @@ When the value is of type `Object`, it is merged with the default configuration 
 
 When the value is of type `Function`, the object returned by the function is merged with the default configuration via `Object.assign`.
 
-The `theme` property is not allowed, otherwise the build will fail, using [`designSystem`](/zh/api/design-system) as the `Tailwind CSS Theme` configuration.
+The `theme` property is not allowed, otherwise the build will fail, using [`designSystem`](/api/config/design-system) as the `Tailwind CSS Theme` configuration.
 
 The rest of the usage is the same as Tailwind CSS: [Quick Portal](https://tailwindcss.com/docs/configuration).
 
