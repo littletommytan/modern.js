@@ -1,4 +1,4 @@
-import type { BuilderPlugin } from '@modern-js/builder-webpack-provider/types';
+import type { BuilderPlugin } from '@modern-js/builder-webpack-provider/src/types';
 import { ModernJsImageMinimizerPlugin } from './minimizer';
 import { withDefaultOptions } from './shared/utils';
 import { Codecs, Options } from './types';

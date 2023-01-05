@@ -30,7 +30,7 @@ export function PluginStylus(
         const { STYLUS_REGEX } = await import('@modern-js/builder-shared');
         const { applyOptionsChain } = await import('@modern-js/utils');
         const { applyBaseCSSRule } = await import(
-          '@modern-js/builder-webpack-provider/plugins/css'
+          '@modern-js/builder-webpack-provider/src/plugins/css'
         );
         const { merge: deepMerge } = await import('@modern-js/utils/lodash');
 

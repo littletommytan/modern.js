@@ -1,6 +1,6 @@
 import { it, expect, describe } from 'vitest';
-import { createStubBuilder } from '@modern-js/builder-webpack-provider/stub';
-import { PluginImage } from '@modern-js/builder-webpack-provider/plugins/image';
+import { createStubBuilder } from '@modern-js/builder-webpack-provider/src/stub';
+import { PluginImage } from '@modern-js/builder-webpack-provider/src/plugins/image';
 import { PluginImageCompress } from '../src';
 
 describe('plugin/image-compress', () => {

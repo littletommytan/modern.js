@@ -7,7 +7,7 @@ import {
   BundlerType,
 } from './types';
 import { getAbsoluteDistPath } from './fs';
-import { logger } from '@modern-js/utils/logger';
+import { logger } from '@modern-js/utils/src/logger';
 
 /**
  * Create context by config.
